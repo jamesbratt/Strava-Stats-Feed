@@ -1,0 +1,11 @@
+.app-wrapper {
+    display: flex;
+}
+
+.sidebar {
+    width: 25%;
+}
+
+.feed {
+    width: 75%;
+}
