@@ -1,8 +1,9 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 
 module.exports = {
-    entry: './src/index.js',
+    entry: './src/ui/index.js',
     mode: 'development',
     output: {
         filename: 'index.js',
@@ -10,13 +11,15 @@ module.exports = {
     },
     devtool: 'inline-source-map',
     plugins: [
+        new Dotenv(),
         new HtmlWebpackPlugin({
             title: 'Strava Stats Feed',
-            template: './src/index.html'
+            template: './src/ui/index.html'
         }),
     ],
     devServer: {
         contentBase: './dist',
+        historyApiFallback: true,
     },
     module: {
         rules: [
