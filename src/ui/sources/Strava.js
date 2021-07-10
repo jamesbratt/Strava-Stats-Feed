@@ -4,7 +4,7 @@ export const getAthleteActivities = (authenticationToken) => {
     return fetch(`${STRAVA_API_BASE_URL}/athlete/activities`, {
         headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer gffg`
+            Authorization: `Bearer ${authenticationToken}`
         },
     })
     .then(response => response.json())
@@ -17,6 +17,9 @@ export const getAthleteActivities = (authenticationToken) => {
     .catch(({ message }) => {
         if (message === 'Authorization Error') {
             sessionStorage.removeItem('strava_profile');
+
+            // TODO use React context for holding/clearing the auth token
+            location.reload();
         } else {
             return message;
         }
