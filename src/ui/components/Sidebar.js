@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import JsonAnalyse from 'react-json-analyse';
 
-const Sidebar = ({ addChart }) => {
+import { getAthleteActivities } from '../sources/Strava';
+
+const Sidebar = ({ addChart, authenticationToken }) => {
+    const [data, updateData] = useState(null);
+    useEffect(() => {
+        getAthleteActivities(authenticationToken)
+            .then(activities => updateData(activities))
+            .catch(() => console.error('Error'));
+    }, []);
+
     return (
         <div className="sidebar">
-            <JsonAnalyse json={[]} onSubmit={(data) => addChart({ type: 'add', payload: data })} />
+            {data ? <JsonAnalyse json={data} onSubmit={(data) => addChart({ type: 'add', payload: data })} /> : <>Loading...</>}
         </div>
     );
 }

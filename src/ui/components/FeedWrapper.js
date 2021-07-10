@@ -31,7 +31,7 @@ const FeedWrapper = ({ stravaProfile }) => {
                 !stravaProfile ?
                     <a href={stravaLoginUrl}>Login</a> :
                     <>
-                        <Sidebar addChart={dispatch} />
+                        <Sidebar addChart={dispatch} authenticationToken={stravaProfile.access_token} />
                         <Feed charts={charts} />
                     </>
             }

@@ -14,7 +14,10 @@ const Auth = ({ stravaProfile, setStravaProfile }) => {
             body: JSON.stringify({ code }),
         })
         .then(response => response.json())
-        .then(data => setStravaProfile(data))
+        .then(data => {
+            sessionStorage.setItem('strava_profile', JSON.stringify(data));
+            setStravaProfile(data);
+        })
         .catch((error) => {
             console.error('Error:', error);
         });

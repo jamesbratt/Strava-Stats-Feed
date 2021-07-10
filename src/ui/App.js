@@ -6,9 +6,11 @@ import { Router } from '@reach/router';
 
 import './css/styles.css';
 
+const stravaProfileInSession = sessionStorage.getItem('strava_profile');
+
 const App = () => {
 
-    const [stravaProfile, setStravaProfile] = useState(null); 
+    const [stravaProfile, setStravaProfile] = useState(stravaProfileInSession ? JSON.parse(stravaProfileInSession) : null); 
 
     return (
         <Router>
