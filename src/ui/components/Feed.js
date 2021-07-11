@@ -3,7 +3,7 @@ import Visualization from './Visualization';
 
 const Feed = ({ charts }) => {
     return (
-        <div className="feed">{charts.map((c, i) => <Visualization key={i} />)}</div>
+        <div className="feed"><div className="feed-inner">{charts.map((chartData, i) => <Visualization key={i} data={chartData} />)}</div></div>
     );
 };
 

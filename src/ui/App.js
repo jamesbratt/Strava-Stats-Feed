@@ -13,7 +13,7 @@ const App = () => {
     const [stravaProfile, setStravaProfile] = useState(stravaProfileInSession ? JSON.parse(stravaProfileInSession) : null); 
 
     return (
-        <Router>
+        <Router className="full-height">
             <FeedWrapper path="/" stravaProfile={stravaProfile} />
             <Auth path="authenticate" stravaProfile={stravaProfile} setStravaProfile={setStravaProfile} />
         </Router>

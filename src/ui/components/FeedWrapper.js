@@ -26,7 +26,7 @@ const FeedWrapper = ({ stravaProfile }) => {
     stravaLoginUrl += `&response_type=code`
     
     return (
-        <div className="app-wrapper">
+        <div className="app-wrapper full-height">
             {
                 !stravaProfile ?
                     <a href={stravaLoginUrl}>Login</a> :

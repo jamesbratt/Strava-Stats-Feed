@@ -1,11 +1,40 @@
+* { box-sizing: border-box; }
+
+body, html {
+    height: 100%;
+    margin: 0;
+    overflow: hidden;
+}
+
+.full-height {
+    height: 100%;
+}
+
 .app-wrapper {
     display: flex;
+    overflow: hidden;
 }
 
 .sidebar {
     width: 25%;
+    padding: 1em;
+    border-right: 1px solid #E6E6E6;
 }
 
 .feed {
+    padding: 1em;
     width: 75%;
+    overflow: auto;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.chart-outer {
+    border-top: 1px solid #E6E6E6;
+    padding: 2em 0;
+}
+
+.chart-inner {
+    width: 700px;
+    position: relative;
 }
