@@ -3,7 +3,14 @@ import JsonAnalyse from 'react-json-analyse';
 
 import { getAthleteActivities } from '../sources/Strava';
 
-const Sidebar = ({ addChart, authenticationToken }) => {
+function uuidv4() {
+    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+        var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+        return v.toString(16);
+    });
+};
+
+const Sidebar = ({ addChart, chartToEdit, isOpen, authenticationToken, onClose }) => {
     const [data, updateData] = useState(null);
     useEffect(() => {
         getAthleteActivities(authenticationToken)
@@ -11,9 +18,15 @@ const Sidebar = ({ addChart, authenticationToken }) => {
             .catch(() => console.error('Error'));
     }, []);
 
+    let classes = 'sidebar';
+    if (isOpen) {
+        classes = classes += ' open';
+    }
+
     return (
-        <div className="sidebar">
-            {data ? <JsonAnalyse json={data} onSubmit={(data) => addChart({ type: 'add', payload: data })} /> : <>Loading...</>}
+        <div className={classes}>
+            <button onClick={() => onClose(false)}>Close</button>
+            {data ? <JsonAnalyse json={data} onSubmit={(data) => addChart({ type: chartToEdit ? 'update' : 'add', payload: { data, id: chartToEdit || uuidv4(), isEditing: true, lastUpdated: new Date() } })} /> : <>Loading...</>}
         </div>
     );
 }

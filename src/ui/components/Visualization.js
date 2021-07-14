@@ -1,23 +1,16 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import Chart from 'chart.js/auto';
 
-const Visualization = ({ data }) => {
+const Visualization = ({ id, data, onEdit, lastUpdated }) => {
 
     const chartRef = useRef(null);
+    const [chartInstance, updateChartInstance] = useState(null);
 
     useEffect(() => {
         if (chartRef && chartRef.current) {
-            new Chart(chartRef.current, {
+            const instance = new Chart(chartRef.current, {
                 type: 'bar',
-                data: {
-                    labels: data.categories,
-                    datasets: [
-                        {
-                            label: 'Dataset',
-                            data: data.series,
-                        },
-                    ]
-                },
+                data: {},
                 options: {
                     scales: {
                         y: {
@@ -26,14 +19,34 @@ const Visualization = ({ data }) => {
                     }
                 }
             });
+
+            updateChartInstance(instance);
         }
-    }, [chartRef])
+    }, [chartRef]);
+
+    useEffect(() => {
+        if (chartInstance) {
+            const newChartData = {
+                labels: data.categories,
+                datasets: [
+                    {
+                        label: 'Dataset',
+                        data: data.series,
+                    },
+                ]
+              };
+    
+            chartInstance.data = newChartData;
+            chartInstance.update();
+        }
+    }, [chartInstance, lastUpdated]);
 
     return (
         <div className="chart-outer">
             <div className="chart-inner">
                 <canvas ref={chartRef} />
             </div>
+            <button onClick={() => onEdit({ type: 'edit', payload: id })}>Edit</button>
         </div>
     )
 }

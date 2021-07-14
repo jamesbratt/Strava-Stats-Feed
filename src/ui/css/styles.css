@@ -19,14 +19,22 @@ body, html {
     width: 25%;
     padding: 1em;
     border-right: 1px solid #E6E6E6;
+    display: none;
+}
+
+.sidebar.open {
+    display: block;
 }
 
 .feed {
     padding: 1em;
-    width: 75%;
     overflow: auto;
     display: flex;
     flex-direction: column-reverse;
+    height: 100%;
+    height: -webkit-calc(100% - 100px);
+    height: -moz-calc(100% - 100px);
+    height: calc(100% - 100px);
 }
 
 .chart-outer {
@@ -37,4 +45,18 @@ body, html {
 .chart-inner {
     width: 700px;
     position: relative;
+}
+
+.foo {
+    position: relative;
+    width: 100%;
+}
+
+.add-chart {
+    bottom: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    padding: 50px;
+    text-align: center;
 }
